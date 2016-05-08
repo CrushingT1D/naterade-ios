@@ -28,7 +28,7 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>WKCompanionAppBundleIdentifier</key>
-	<string>com.loudnate.Naterade</string>
+	<string>com.crushingt1d.Naterade</string>
 	<key>WKWatchKitApp</key>
 	<true/>
 </dict>
