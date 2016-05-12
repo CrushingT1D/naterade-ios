@@ -1076,7 +1076,7 @@
 				);
 				INFOPLIST_FILE = Naterade/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.crushingt1d.Naterade;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crushingt1d2.Naterade;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1096,7 +1096,7 @@
 				);
 				INFOPLIST_FILE = Naterade/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.crushingt1d.Naterade;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crushingt1d2.Naterade;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1109,7 +1109,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "WatchApp Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.crushingt1d.Naterade.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crushingt1d2.Naterade.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
@@ -1125,7 +1125,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "WatchApp Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.crushingt1d.Naterade.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crushingt1d2.Naterade.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
@@ -1144,7 +1144,7 @@
 				IBSC_MODULE = WatchApp_Extension;
 				INFOPLIST_FILE = WatchApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.crushingt1d.Naterade.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crushingt1d2.Naterade.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
@@ -1163,7 +1163,7 @@
 				IBSC_MODULE = WatchApp_Extension;
 				INFOPLIST_FILE = WatchApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.crushingt1d.Naterade.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crushingt1d2.Naterade.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
@@ -1182,7 +1182,7 @@
 				);
 				INFOPLIST_FILE = NateradeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.crushingt1d.NateradeTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crushingt1d2.NateradeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1197,7 +1197,7 @@
 				);
 				INFOPLIST_FILE = NateradeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.crushingt1d.NateradeTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.crushingt1d2.NateradeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

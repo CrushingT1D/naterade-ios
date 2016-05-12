@@ -79,6 +79,7 @@ class DoseMath {
         var rate: Double?
         var duration = NSTimeInterval(minutes: 30)
 
+        
         if minGlucose.quantity.doubleValueForUnit(glucoseTargetRange.unit) < minGlucoseTargets.minValue && (!allowPredictiveTempBelowRange || eventualGlucose.quantity.doubleValueForUnit(glucoseTargetRange.unit) <= eventualGlucoseTargets.minValue) {
             let targetGlucose = HKQuantity(unit: glucoseTargetRange.unit, doubleValue: (minGlucoseTargets.minValue + minGlucoseTargets.maxValue) / 2)
             rate = calculateTempBasalRateForGlucose(minGlucose.quantity,
@@ -94,6 +95,7 @@ class DoseMath {
                 adjustedMaxBasalRate = currentScheduledBasalRate
             }
 
+            // JMTODO: make this a setting instead of averaging the range. So we are not relying on center
             let targetGlucose = HKQuantity(unit: glucoseTargetRange.unit, doubleValue: (eventualGlucoseTargets.minValue + eventualGlucoseTargets.maxValue) / 2)
             rate = calculateTempBasalRateForGlucose(eventualGlucose.quantity,
                 toTargetGlucose: targetGlucose,
@@ -159,9 +161,16 @@ class DoseMath {
         let eventualGlucoseTargets = glucoseTargetRange.valueAt(eventualGlucose.startDate)
         let minGlucoseTargets = glucoseTargetRange.valueAt(minGlucose.startDate)
 
+        // Naterade standard version blocks bolus from carbs if we below our min target
         guard minGlucose.quantity.doubleValueForUnit(glucoseTargetRange.unit) >= minGlucoseTargets.minValue else {
             return 0
         }
+        
+//        // crushingT1D version allows bolus as long as we're at or above 60
+//        // JMTODO: Later make this a setting
+//        guard minGlucose.quantity.doubleValueForUnit(glucoseTargetRange.unit) >= 60 else {
+//            return 0
+//        }
 
         let targetGlucose = eventualGlucoseTargets.maxValue
         let currentSensitivity = insulinSensitivity.quantityAt(date).doubleValueForUnit(glucoseTargetRange.unit)

@@ -30,6 +30,7 @@ class DiagnosticLogger {
     }
 
     func addMessage(message: [String: AnyObject], toCollection collection: String) {
+        
         if !isSimulator,
             let messageData = try? NSJSONSerialization.dataWithJSONObject(message, options: []),
             let URL = NSURL(string: APIHost)?.URLByAppendingPathComponent(APIPath).URLByAppendingPathComponent(collection),
