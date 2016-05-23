@@ -160,7 +160,7 @@ class DoseMath {
         let minGlucoseTargets = glucoseTargetRange.valueAt(minGlucose.startDate)
 
         // JM: Code commented out for issue 16 below
-//        guard minGlucose.quantity.doubleValueForUnit(glucoseTargetRange.unit) >= minGlucoseTargets.minValue else {
+//       guard minGlucose.quantity.doubleValueForUnit(glucoseTargetRange.unit) >= minGlucoseTargets.minValue else {
         
         // JM: https://github.com/CrushingT1D/naterade-ios/issues/16
         guard minGlucose.quantity.doubleValueForUnit(glucoseTargetRange.unit) >= 60 else {
