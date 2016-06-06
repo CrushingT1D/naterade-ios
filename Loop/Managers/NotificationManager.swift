@@ -155,4 +155,26 @@ struct NotificationManager {
 
         UIApplication.sharedApplication().presentLocalNotificationNow(notification)
     }
+    
+    // JM: https://github.com/CrushingT1D/naterade-ios/issues/25
+    static func sendBolusRecommendedNotification(units: Double)
+    {
+        let notification = UILocalNotification()
+        
+        notification.alertTitle = NSLocalizedString("Bolus Recommended", comment: "The notification title for a recommended bolus")
+        
+        let unitsString = NSNumberFormatter.localizedStringFromNumber(units, numberStyle: .DecimalStyle)
+        
+        notification.alertBody = NSLocalizedString("You may want to consider a bolus of \(unitsString)U", comment: "")
+    }
+    
+    // JM: https://github.com/CrushingT1D/naterade-ios/issues/26
+    static func sendCarbCorrectionNeededNotification()
+    {
+        let notification = UILocalNotification()
+        
+        notification.alertTitle = NSLocalizedString("Carb Correction Recommended", comment: "The notification title for a recommended carb correction")
+                
+        notification.alertBody = NSLocalizedString("You may want to consider having some fast acting carbs", comment: "")
+    }
 }

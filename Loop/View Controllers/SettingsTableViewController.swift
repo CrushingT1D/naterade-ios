@@ -105,8 +105,11 @@ class SettingsTableViewController: UITableViewController, DailyValueScheduleTabl
         case InsulinSensitivity
         case MaxBasal
         case MaxBolus
+        case HomeScreenBadgeSwitch
+        case ChartHistoryHours
+        case AllowPredictedTempBelowRange
 
-        static let count = 9
+        static let count = 12
     }
 
     private lazy var valueNumberFormatter: NSNumberFormatter = {
@@ -228,6 +231,36 @@ class SettingsTableViewController: UITableViewController, DailyValueScheduleTabl
                 } else {
                     configCell.detailTextLabel?.text = TapToSetString
                 }
+                
+            // JM
+            case .HomeScreenBadgeSwitch:
+                configCell.textLabel?.text = NSLocalizedString("Home Icon BG Badge", comment: "The title text for the home icon BG badge")
+                
+                if let maxBolus = dataManager.maximumBolus {
+                    configCell.detailTextLabel?.text = "\(valueNumberFormatter.stringFromNumber(maxBolus)!) U"
+                } else {
+                    configCell.detailTextLabel?.text = TapToSetString
+                }
+            
+            // JM
+            case .ChartHistoryHours:
+                configCell.textLabel?.text = NSLocalizedString("Chart History (in hrs)", comment: "The title text for the chart history in hours")
+                
+                if let maxBolus = dataManager.maximumBolus {
+                    configCell.detailTextLabel?.text = "\(valueNumberFormatter.stringFromNumber(maxBolus)!) U"
+                } else {
+                    configCell.detailTextLabel?.text = TapToSetString
+                }
+             
+            // JM
+            case .AllowPredictedTempBelowRange: break
+//                configCell.textLabel?.text = NSLocalizedString("Allow Predicted Temp Below Range", comment: "The title text for allow predicted temp below range)
+//                
+//                if let maxBolus = dataManager.maximumBolus {
+//                    configCell.detailTextLabel?.text = "\(valueNumberFormatter.stringFromNumber(maxBolus)!) U"
+//                } else {
+//                    configCell.detailTextLabel?.text = TapToSetString
+//                }
             }
 
             cell = configCell
@@ -395,6 +428,7 @@ class SettingsTableViewController: UITableViewController, DailyValueScheduleTabl
                 } else {
                     showViewController(scheduleVC, sender: sender)
                 }
+            default: break
             }
         case .Devices:
             let vc = RileyLinkDeviceTableViewController()

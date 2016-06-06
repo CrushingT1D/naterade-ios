@@ -16,9 +16,17 @@ import SwiftCharts
 
 
 class StatusTableViewController: UITableViewController, UIGestureRecognizerDelegate {
+    
+    // JM:
+    var lastError = "Warming up."
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // JM:
+        bgValue.setTitle("---", forState: UIControlState.Normal)
+        bgValue.addTarget(self, action: #selector(self.pressedBg(_:)), forControlEvents: .TouchUpInside)
+        loopDrilldown.addTarget(self, action: #selector(self.pressedLoop(_:)), forControlEvents: .TouchUpInside)
 
         let notificationCenter = NSNotificationCenter.defaultCenter()
         let mainQueue = NSOperationQueue.mainQueue()
@@ -114,14 +122,35 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
     private var reloading = false
 
     private func reloadData() {
+        
+        // JM: Set badge
+        if let glucose = dataManager.latestGlucoseMessage {
+            UIApplication.sharedApplication().applicationIconBadgeNumber = Int(glucose.glucose)
+        } else {
+            UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+
+        }
+        
         if active && visible && needsRefresh {
+            // JM:
+            
+            if let glucose = dataManager.latestGlucoseMessage {
+                bgValue.setTitle("\(glucose.glucose)", forState: UIControlState.Normal)
+            } else {
+                bgValue.setTitle("---", forState: UIControlState.Normal)
+            }
+            
             needsRefresh = false
             reloading = true
 
             tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(Section.Pump.rawValue, Section.count - Section.Pump.rawValue)
             ), withRowAnimation: visible ? .Automatic : .None)
 
-            charts.startDate = NSDate(timeIntervalSinceNow: -NSTimeInterval(hours: 6))
+            // JM:
+            //charts.startDate = NSDate(timeIntervalSinceNow: -NSTimeInterval(hours: 6))
+            
+            // JM:
+            charts.startDate = NSDate(timeIntervalSinceNow: -NSTimeInterval(hours: 32))
             let reloadGroup = dispatch_group_create()
 
             if let glucoseStore = dataManager.glucoseStore {
@@ -142,7 +171,11 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
             dispatch_group_enter(reloadGroup)
             dataManager.loopManager.getLoopStatus { (predictedGlucose, recommendedTempBasal, lastTempBasal, lastLoopCompleted, error) -> Void in
                 if error != nil {
-                    self.needsRefresh = true
+                    if case self.lastError = error.debugDescription {
+                       self.needsRefresh = true
+                    }
+                } else {
+                    self.lastError = "All Good!"
                 }
 
                 self.charts.predictedGlucoseValues = predictedGlucose ?? []  // FixtureData.predictedGlucoseData
@@ -739,4 +772,22 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
     @IBOutlet var reservoirVolumeHUD: ReservoirVolumeHUDView!
 
     @IBOutlet var batteryLevelHUD: BatteryLevelHUDView!
+    
+    // JM:
+    @IBOutlet var bgValue: UIButton!
+    @IBOutlet var loopDrilldown: UIButton!
+    
+    // JM:
+    func pressedBg(sender: UIButton!) {
+        if let URL = NSURL(string: "dexcomcgm://") {
+            UIApplication.sharedApplication().openURL(URL)
+        }
+    }
+    
+    func pressedLoop(sender: UIButton!) {
+        let alert = UIAlertController(title: "Loop Status", message: self.lastError, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
+        self.presentViewController(alert, animated: true){}
+    }
+    
 }

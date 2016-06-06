@@ -27,6 +27,11 @@ extension NSUserDefaults {
         case PumpTimeZone = "com.loudnate.Naterade.PumpTimeZone"
         case TransmitterID = "com.loudnate.Naterade.TransmitterID"
         case TransmitterStartTime = "com.loudnate.Naterade.TransmitterStartTime"
+        
+        // JM
+        case HomeScreenBadgeSwitch = "com.loudnate.Naterade.HomeScreenBadgeSwitch"
+        case ChartHistoryHours = "com.loudnate.Naterade.ChartHistoryHours"
+        case AllowPredictedTempBelowRange = "com.loudnate.Naterade.AllowPredictedTempBelowRange"
     }
 
     var basalRateSchedule: BasalRateSchedule? {
@@ -201,5 +206,36 @@ extension NSUserDefaults {
             setObject(newValue, forKey: Key.TransmitterID.rawValue)
         }
     }
+    
+    // JM
+    var HomeScreenBadgeSwitch: Bool? {
+        get {
+            return boolForKey(Key.HomeScreenBadgeSwitch.rawValue)
+        }
+        set {
+            setObject(newValue, forKey: Key.HomeScreenBadgeSwitch.rawValue)
+        }
+    }
+
+    // JM
+    var ChartHistoryHours: Int? {
+        get {
+            return integerForKey(Key.ChartHistoryHours.rawValue)
+        }
+        set {
+            setObject(newValue, forKey: Key.ChartHistoryHours.rawValue)
+        }
+    }
+    
+    // JM
+    var AllowPredictedTempBelowRange: Bool? {
+        get {
+            return boolForKey(Key.AllowPredictedTempBelowRange.rawValue)
+        }
+        set {
+            setObject(newValue, forKey: Key.AllowPredictedTempBelowRange.rawValue)
+        }
+    }
+    
 
 }

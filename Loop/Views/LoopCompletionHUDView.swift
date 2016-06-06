@@ -17,6 +17,15 @@ class LoopCompletionHUDView: HUDView {
 
         updateDisplay(nil)
     }
+    
+    
+    // JM:
+//    @IBAction func didTapLoopCircle(sender: UIButton) {
+//        let error = LoopDataManager.displayLastLoopError(<#T##LoopDataManager#>)
+//        print("Pressed button \(loopManager.)")
+//        
+//        
+//    }
 
     var dosingEnabled = false {
         didSet {

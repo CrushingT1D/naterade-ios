@@ -36,6 +36,11 @@ class DoseMath {
 
         let rate = min(maxBasalRate, max(0, doseUnits / (duration / NSTimeInterval(hours: 1)) + currentBasalRate))
 
+        // JM:
+        if rate < doseUnits {
+            // Notify the user to consider bolusing
+        }
+        
         return round(rate * basalStrokes) / basalStrokes
     }
 
@@ -62,7 +67,7 @@ class DoseMath {
         glucoseTargetRange: GlucoseRangeSchedule,
         insulinSensitivity: InsulinSensitivitySchedule,
         basalRateSchedule: BasalRateSchedule,
-        allowPredictiveTempBelowRange: Bool = false
+        allowPredictiveTempBelowRange: Bool = true // JM: changed from false
     ) -> (rate: Double, duration: NSTimeInterval)? {
         guard glucose.count > 1 else {
             return nil
@@ -163,7 +168,13 @@ class DoseMath {
 //      guard minGlucose.quantity.doubleValueForUnit(glucoseTargetRange.unit) >= minGlucoseTargets.minValue else {
         
         // JM: https://github.com/CrushingT1D/naterade-ios/issues/16
+        //
         guard minGlucose.quantity.doubleValueForUnit(glucoseTargetRange.unit) >= 60 else {
+            
+            // JM: https://github.com/CrushingT1D/naterade-ios/issues/26
+            // If Minimum glucose within the next 30m is below our bottom marker of 60
+            NotificationManager.sendCarbCorrectionNeededNotification()
+            
             return 0
         }
 
